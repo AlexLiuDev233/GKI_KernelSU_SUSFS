@@ -239,6 +239,12 @@ jobs:
               ;;
           esac
 
+      - name: 添加 Baseband_Guard
+        run: |
+          echo "更改为配置目录: $CONFIG..."
+          cd "$CONFIG"
+          curl -LSs "https://raw.githubusercontent.com/vc-teahouse/Baseband-guard/refs/heads/main/setup.sh" | bash -s
+    
       - name: 添加 KernelSU
         run: |
           echo "更改为配置目录: $CONFIG..."
