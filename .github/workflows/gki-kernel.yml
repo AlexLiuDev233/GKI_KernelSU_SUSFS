@@ -430,6 +430,13 @@ jobs:
           CONFIG_FILE="$CONFIG/common/arch/arm64/configs/gki_defconfig"
           echo "Changing to configuration directory: $CONFIG_FILE..."
           echo "CONFIG_DEFAULT_BBR=y" >> "$CONFIG_FILE"
+
+      - name: 设置LSM，启用Baseband_guard
+        if: ${{ inputs.set_defbbr }}
+        run: |
+          CONFIG_FILE="$CONFIG/common/arch/arm64/configs/gki_defconfig"
+          echo "Changing to configuration directory: $CONFIG_FILE..."
+          echo 'CONFIG_LSM="landlock,lockdown,yama,loadpin,safesetid,integrity,selinux,smack,tomoyo,apparmor,bpf,baseband_guard"' >> "$CONFIG_FILE"
            
       - name: 添加SUSFS配置设置
         run: |
